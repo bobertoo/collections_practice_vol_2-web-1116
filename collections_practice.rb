@@ -1,4 +1,3 @@
-require 'pry'
 def begins_with_r(array_of_words)
   !array_of_words.index { |word| word[0].upcase != 'R' }
 end
@@ -33,17 +32,17 @@ def merge_data(keys, data)
   keys.map { |key| key.merge(data[0][key[:first_name]]) }
 end
 
-def find_cool(array)
-  array.select { |data_hash| data_hash[:temperature] == "cool" }
+def find_cool(cool)
+  cool.select { |data_hash| data_hash.has_value?("cool") }
 end
 
 def organize_schools(schools)
   locations = {}
-  schools.each { |key, value|
+  schools.each { |school, value|
     if !locations[value[:location]]
-      locations[value[:location]] = [key]
+      locations[value[:location]] = [school]
     else
-      locations[value[:location]] << key
+      locations[value[:location]] << school
     end
   }
   locations
